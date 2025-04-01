@@ -71,9 +71,13 @@
             <button onclick="insert('*')">×</button>
             
             <button onclick="insert('0')">0</button>
-            
-            <button onclick="clearExpression()">C</button>
+            <button onclick="insert('(')">(</button>
+            <button onclick="insert(')')">)</button>
             <button onclick="insert('/')">÷</button>
+            
+            <button onclick="insert('Math.sqrt(')">√</button>
+            <button onclick="insert('**')">^</button>
+            <button onclick="clearExpression()">C</button>
             <button onclick="calculate()">=</button>
         </div>
     </div>
@@ -93,7 +97,9 @@
         
         function calculate() {
             try {
-                document.getElementById("expression").value = eval(document.getElementById("expression").value);
+                let exp = document.getElementById("expression").value;
+                exp = exp.replace(/\^/g, '**'); // Corrige a potenciação
+                document.getElementById("expression").value = eval(exp);
             } catch {
                 document.getElementById("expression").value = "Erro";
             }
